@@ -9,6 +9,12 @@
     text-align: center;
     padding: 10px 0;
 }
+.Home header a {
+    color: #fff;
+    text-align: right;
+    padding: 10px 0;
+    text-decoration: none;
+}
 .Home nav {
     background-color: #444;
     padding: 10px 0;
@@ -23,9 +29,11 @@
     padding: 20px;
 }
 .Home article {
+    margin-top: 20px;
     margin-bottom: 20px;
     border-bottom: 1px solid #ccc;
 }
+
 .Home h2 {
     color: #333;
 }
