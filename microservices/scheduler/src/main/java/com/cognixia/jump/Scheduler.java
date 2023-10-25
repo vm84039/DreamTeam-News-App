@@ -1,25 +1,34 @@
 package com.cognixia.jump;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import com.cognixia.jump.model.News.Category;
+import com.cognixia.jump.service.NewsApiService;
+
+
 
 @Component
 public class Scheduler {
 	
-    @Scheduled(fixedRate = 60000) // 60000 milliseconds = 1 minute
+	@Autowired
+	NewsApiService newsService;
+	
+	@Scheduled(fixedRate = 3600000) // 1 hour in milliseconds
     public void runScheduledTask() {
-        Date currentDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd hh:mm a");
-        String formattedDate = dateFormat.format(currentDate);
         // Code to be executed periodically
-        System.out.println("Scheduled task executed @ " + formattedDate);
+        Category[] categories = Category.values();
+        for (Category category : categories) {
+            newsService.parseApi(category);
+        }        
+        long totalEntries = newsService.getTotalEntries();
+
+        // If the number of entries is greater than 500, reduce it to 500 by deleting oldest entries
+        if (totalEntries > 500) {
+            int entriesToDelete = (int) (totalEntries - 500);
+            newsService.deleteOldestEntries(entriesToDelete);
+        }
     }
-
-    
-
-
-
-
 }
