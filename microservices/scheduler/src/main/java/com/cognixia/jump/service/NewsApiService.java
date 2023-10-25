@@ -67,6 +67,9 @@ public class NewsApiService {
 							if (keywordsBuilder.length() > 0) {
 								keywordsBuilder.setLength(keywordsBuilder.length() - 1);
 							}
+							if (keywordsBuilder.length() > 500) {
+								keywordsBuilder.setLength(500);
+							}
 						}
 
 						String title = newsNode.get("title").asText();
