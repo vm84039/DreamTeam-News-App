@@ -7,11 +7,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import com.cognixia.jump.model.User.Role;
 
 @Entity
+@Table(name="users")
 public class User {
 	
 	public static enum Role {
@@ -40,7 +41,7 @@ public class User {
 	@Column(nullable = false)
 	private Role role;
 	
-	@Column(columnDefinition = "boolean default true")
+	@Column(columnDefinition = "bit default 1")
 	private boolean enabled;
 	
 	
