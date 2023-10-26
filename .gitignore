@@ -41,6 +41,7 @@ build/
 /react-app/secrets
 /react-app/src/secrets
 /react-app/public/secrets
+/react-app/yarn.lock
 
 /.pnp
 .pnp.js
