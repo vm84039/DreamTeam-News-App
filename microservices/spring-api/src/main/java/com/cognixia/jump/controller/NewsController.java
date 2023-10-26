@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cognixia.jump.model.News;
 import com.cognixia.jump.model.News.Category;
 import com.cognixia.jump.repository.NewsRepository;
+import com.cognixia.jump.service.NewsService;
 
 @RestController
 @RequestMapping("/api/")
@@ -17,6 +18,9 @@ public class NewsController {
 	
 	@Autowired
 	NewsRepository repo;
+	
+	@Autowired
+	NewsService service;
 	
 	//http://localhost:8080/api/news/sports		
 	@GetMapping("/news/{query}")
@@ -33,6 +37,30 @@ public class NewsController {
 	        return ResponseEntity.status(200).body(news);
 	    }
 	}
+	
+	//http://localhost:8080/api/news/homepage
+	@GetMapping("/news/homepage")
+	public ResponseEntity<?> getNewsforHomePage() {
+		List<News> news = service.getNewsforHomePage();
+
+	    if (news.isEmpty()) {
+	        return ResponseEntity.status(404).body("Server error");
+	    } else {
+	        return ResponseEntity.status(200).body(news);
+	    }
+	}
+	@GetMapping("/news/ticker")
+	public ResponseEntity<?> getNewsforTicker() {
+		List<String> news = service.getNewsforTicker();
+
+	    if (news.isEmpty()) {
+	        return ResponseEntity.status(404).body("Server error");
+	    } else {
+	        return ResponseEntity.status(200).body(news);
+	    }
+	}
+
+	
 
 	private Category getCategoryFromString(String query) {
 	    try {
