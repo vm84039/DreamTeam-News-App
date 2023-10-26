@@ -35,24 +35,24 @@ export default function Login() {
     });
    }
 
-  //  async function getUser(token) {
-  //   return fetch('http://localhost:8082/api/user/whoami', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'Bearer ' + token.jwt
-  //     }
-  //   })
-  //    .then(data =>  {
-  //     if (data.ok) {
-  //       return data.json();
-  //     }
-  //     throw new Error("WRONG USERNAME AND PASSWORD");
-  //   })
-  //    .catch((error) => {
-  //     console.log(error);
-  //   });
-  //  }
+   async function getUser(token) {
+    return fetch('http://localhost:8082/api/user/whoami', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token.jwt
+      }
+    })
+     .then(data =>  {
+      if (data.ok) {
+        return data.json();
+      }
+      throw new Error("WRONG USERNAME AND PASSWORD");
+    })
+     .catch((error) => {
+      console.log(error);
+    });
+   }
 
    async function handleSubmit(event) {
     event.preventDefault();
@@ -61,11 +61,11 @@ export default function Login() {
 
     try {
         const token = await userLogin({username, password});
-        //const user = await getUser(token);
+        const user = await getUser(token);
         userHasAuthenticated(true);
         setToken(token);
         // console.log(user)
-        // setUser(user)
+        setUser(user)
     }   catch (e) {
         onError(e);
         setIsLoading(false);
