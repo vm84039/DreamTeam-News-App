@@ -14,8 +14,9 @@
 	<name>Authenticator</name>
 	<description>Authentication Microservice</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
+	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
@@ -87,6 +88,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>authenticator</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

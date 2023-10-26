@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  spring_api:
+    build:
+      context: ./microservices/spring-api
+      dockerfile: DockerfileSpringApi
+    ports:
+      - "8080:8080"
+    networks:
+      - news_app
+
+  scheduler:
+    build:
+      context: ./microservices/scheduler
+      dockerfile: DockerfileScheduler
+    ports:
+      - "8081:8081"
+    networks:
+      - news_app
+
+  authenticator:
+    build:
+      context: ./microservices/Authenticator
+      dockerfile: DockerfileAuth
+    ports:
+      - "8082:8082"
+    networks:
+      - news_app
+
+  react-app:
+    build:
+      context: ./react-app
+      dockerfile: DockerfileReact
+    ports:
+      - "3000:3000"
+    networks:
+      - news_app
+
+networks:
+  news_app:
+    driver: bridge
