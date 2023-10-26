@@ -37,3 +37,7 @@
 .Home h2 {
     color: #333;
 }
+.category
+{
+    text-transform: capitalize;
+}
