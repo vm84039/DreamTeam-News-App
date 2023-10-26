@@ -1,6 +1,7 @@
 package com.cognixia.jump.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Service;
 import com.cognixia.jump.model.News;
 import com.cognixia.jump.model.News.Category;
 import com.cognixia.jump.repository.NewsRepository;
+
+// FROM AUTHENTICATOR
+// import com.cognixia.jump.model.User;
 
 @Service
 public class NewsService {
@@ -51,5 +55,7 @@ public class NewsService {
 	public Optional<News> getLatestNewsByCategory(Category category) {
 		return repo.findTopByCategoryOrderByPubDateDesc(category);
 	}
+	
+	// ADD USER RELATED THINGS HERE
 
 }
