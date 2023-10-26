@@ -16,7 +16,7 @@ public class Scheduler {
 	@Autowired
 	NewsApiService newsService;
 	
-	@Scheduled(initialDelay = 1000000, fixedRate = 3600000) // 1 hour in milliseconds
+	@Scheduled(initialDelay = 1000000, fixedRate = 5400000) // 1 hour in milliseconds
     public void runScheduledTask() {
         // Code to be executed periodically
         Category[] categories = Category.values();
