@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY target/scheduler.jar .
 
 # Define the command to run the application
-CMD ["java", "-jar", "authenticator.jar"]
+CMD ["java", "-jar", "scheduler.jar"]
 
 # Expose the port the application runs on
 EXPOSE 8081

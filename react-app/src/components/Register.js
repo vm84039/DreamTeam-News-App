@@ -10,23 +10,25 @@ export default function Register() {
 
     const [isLoading, setIsLoading] = useState(false);
     const { userRegistered } = useAppContext();
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("ROLE_USER");
     const [enabled, setEnabled] = useState(true);
-    const [tolerance, setTolerance] = useState("MODERATE");
-    const [zipcode, setZipcode] = useState("");
+    
 
     function validateForm() {
-        return username.length > 0 && password.length > 0;
+        return name.length > 0 && username.length > 0 && password.length > 0 && String(email)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
     }
-    function validateZip() {
-        return postcodeValidator(zipcode, "US");
-
-      }
+    
 
     async function userRegister(user) {
-        return fetch('http://localhost:8082/register/' + zipcode, {
+        return fetch('http://localhost:8082/register', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
@@ -50,7 +52,7 @@ export default function Register() {
         setIsLoading(true);
     
         try {
-            const res = await userRegister({username, password, role, enabled, tolerance});
+            const res = await userRegister({name, email, username, password, role, enabled});
             userRegistered(true);
         }   catch (e) {
             onError(e);
@@ -58,18 +60,37 @@ export default function Register() {
         }
       }
 
-      const handleChange = (e) => {
-        e.persist();
-        setTolerance(e.target.value)
-        console.log(e.target.value);
-      }
+      // const handleChange = (e) => {
+      //   e.persist();
+      //   setTolerance(e.target.value)
+      //   console.log(e.target.value);
+      // }
 
       
 
   return (
     <div className="Login">
+      <h1 style={{textAlign: "center", paddingBottom: "25px"}}>User Registration</h1>
       <Form onSubmit={handleSubmit}>
-        <Form.Group size="lg" controlId="username">
+        <Form.Group size="lg" controlId="name" style={{paddingBottom: "10px"}}>
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            autoFocus
+            type="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group size="lg" controlId="email" style={{paddingBottom: "10px"}}>
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            autoFocus
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group size="lg" controlId="username" style={{paddingBottom: "10px"}}>
           <Form.Label>Username</Form.Label>
           <Form.Control
             autoFocus
@@ -78,7 +99,7 @@ export default function Register() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </Form.Group>
-        <Form.Group size="lg" controlId="password">
+        <Form.Group size="lg" controlId="password" style={{paddingBottom: "10px"}}>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -86,73 +107,15 @@ export default function Register() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Form.Group size="xl" controlId="tolerance">
-            <Form.Label>Temperature Preference (Farenheit)</Form.Label>
-        {['radio'].map((type) => (
-        <div key={`inline-${type}`} className="mb-3">
-          <Form.Check
-            inline
-            label="Very Cold [0 - 25] "
-            value="VERY_COLD"
-            name="group1"
-            type={type}
-            id={`inline-${type}-1`}
-            onChange={handleChange}
-          />
-          <Form.Check
-            inline
-            label="Cold [26 - 55]"
-            value="COLD"
-            name="group1"
-            type={type}
-            id={`inline-${type}-2`}
-            onChange={handleChange}
-          />
-          <Form.Check
-            inline
-            label="Moderate [56 - 68]"
-            value="MODERATE"
-            name="group1"
-            type={type}
-            id={`inline-${type}-3`}
-            onChange={handleChange}
-          />
-          <Form.Check
-            inline
-            label="Hot [69 - 85]"
-            value="HOT"
-            name="group1"
-            type={type}
-            id={`inline-${type}-4`}
-            onChange={handleChange}
-          />
-          <Form.Check
-            inline
-            label="Very Hot [86 - 100]"
-            value="VERY_HOT"
-            name="group1"
-            type={type}
-            id={`inline-${type}-5`}
-            onChange={handleChange}
-          />
-        </div>
-      ))}
-        </Form.Group>
-        <Form.Group size="lg" controlId="location">
-          <Form.Label>Zipcode</Form.Label>
-          <Form.Control
-            type="location"
-            value={zipcode}
-            onChange={(e) => setZipcode(e.target.value)}
-          />
-        </Form.Group>
+        
+        
 
         <LoaderButton
             block="true"
             size="lg"
             type="submit"
             isLoading={isLoading}
-            disabled={!validateForm() && !validateZip()}
+            disabled={!validateForm()}
         >
             Register
         </LoaderButton>

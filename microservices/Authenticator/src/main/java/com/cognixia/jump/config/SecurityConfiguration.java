@@ -32,7 +32,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		http.cors().and().csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/api/sales/**").permitAll()
 			.antMatchers("/authenticate").permitAll() // anyone can create token if they're a user
 			.antMatchers("/register").permitAll()
 			

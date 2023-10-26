@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cognixia.jump</groupId>
-	<artifactId>jump-news-app</artifactId>
+	<artifactId>scheduler</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>News-App</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Scheduler</name>
+	<description>Scheduler for news app</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

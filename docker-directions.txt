@@ -1,5 +1,4 @@
-1. Build the spring boot projects with:
-	...Workspace\News-App\microservices\{project}> mvn clean install -Dmaven.test.skip=true
+1. Run the builder.bat file
 2. Make sure Docker is running
 3. Make sure you are in the parent directory for the project
 4. Run the command:

@@ -26,10 +26,14 @@ const Home = () => {
         <a href="#">Entertainment</a>
         <a
           style={{ position: "absolute", right: "0", paddingRight: "10px" }}
-          href="#"
+          href="/login"
         >
           Login
         </a>
+        <a
+          style={{ position: "absolute", right: "0", paddingRight: "65px" }}
+          href="/register"
+        >Register</a>
         <NewsTicker />
       </nav>
 
