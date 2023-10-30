@@ -35,27 +35,40 @@ public class NewsService {
 	}
 
 	public List<String> getNewsforTicker() {
-	    List<String> checkList = repo.findTop5TitlesByCategoryOrderByPubDateDesc(Category.TOP);
-	    List<String> titleList = new ArrayList<>();
+		List<String> checkList = repo.findTop5TitlesByCategoryOrderByPubDateDesc(Category.TOP);
+		List<String> titleList = new ArrayList<>();
 
-	    for (String title : checkList) {
-	        char lastChar = title.charAt(title.length() - 1);
-	        String modifiedTitle;
+		for (String title : checkList) {
+			char lastChar = title.charAt(title.length() - 1);
+			String modifiedTitle;
 
-	        if (",.?!;:'\"(){}[]".indexOf(lastChar) != -1) {
-	            modifiedTitle = title + "  ";
-	        } else {
-	            modifiedTitle = title + ".  ";
-	        }
-	        titleList.add(modifiedTitle);
-	    }
+			if (",.?!;:'\"(){}[]".indexOf(lastChar) != -1) {
+				modifiedTitle = title + "  ";
+			} else {
+				modifiedTitle = title + ".  ";
+			}
+			titleList.add(modifiedTitle);
+		}
 
-	    return titleList;
+		return titleList;
 	}
+
 	public Optional<News> getLatestNewsByCategory(Category category) {
 		return repo.findTopByCategoryOrderByPubDateDesc(category);
 	}
 	
 	// ADD USER RELATED THINGS HERE
 
+	public List<News> getNewsforPage() {
+		List<News> homePageList = new ArrayList<>();
+		Category[] categories = Category.values();
+
+		for (Category category : categories) {
+			Optional<News> story = getLatestNewsByCategory(category);
+			if (story.isPresent()) {
+				homePageList.add(story.get());
+			}
+		}
+		return homePageList;
+	}
 }

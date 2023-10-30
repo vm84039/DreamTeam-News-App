@@ -1,13 +1,44 @@
+@font-face {
+    font-family: mainFont;
+    src: url(Tinos-Regular.ttf);
+}
+
+@font-face {
+    font-family: headerFont;
+    src: url(MCKLB___.ttf);
+}
+
+.mainPart {
+    font-family: mainFont;
+
+}
+
+
 .Home body {
-    font-family: Arial, sans-serif;
+    font-family: mainFont;
     margin: 0;
     padding: 0;
 }
+
+.title {
+    font-family: headerFont;
+}
+
 .Home header, footer {
-    background-color: #333;
+    font-family: headerFont;
+    background-color: #B6FFFA;
     color: #fff;
     text-align: center;
     padding: 10px 0;
+}
+
+h1 {
+    text-decoration: underline;
+    font-size: 100px;
+}
+
+h3 {
+    color:#071952
 }
 .Home header a {
     color: #fff;
@@ -16,7 +47,7 @@
     text-decoration: none;
 }
 .Home nav {
-    background-color: #444;
+    background-color: #98E4FF;
     padding: 10px 0;
     text-align: center;
 }
@@ -34,9 +65,16 @@
     border-bottom: 1px solid #ccc;
 }
 
-.Home h2 {
-    color: #333;
+.top {
+    color: #787573;
+    font-style: italic;
 }
+
+.headA {
+    color: #071952;
+    font-weight: bold;
+}
+
 .category
 {
     text-transform: capitalize;

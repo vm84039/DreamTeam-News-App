@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./Home.css";
-import { getNewsforHomePage } from "../service/NewsApi";
-import NewsTicker from "./NewsTicker/NewsTicker";
+import "../Home.css";
+import { getNewsforHomePage } from "../../service/NewsApi";
+import NavBar from "../NavBar";
 
 const Home = () => {
   const [rowData, setRowData] = useState([]);
@@ -15,37 +15,20 @@ const Home = () => {
   return (
     <div className="Home">
       <header>
-        <h1>News Website</h1>
+        <h1 className="title">Dreamtastic News</h1>
+        <h3 className="title">The fever dream you can't wake up from!</h3>
       </header>
+      <NavBar />
 
-      <nav>
-        <a href="#">Home</a>
-        <a href="#">World</a>
-        <a href="#">Technology</a>
-        <a href="#">Sports</a>
-        <a href="#">Entertainment</a>
-        <a
-          style={{ position: "absolute", right: "0", paddingRight: "10px" }}
-          href="/login"
-        >
-          Login
-        </a>
-        <a
-          style={{ position: "absolute", right: "0", paddingRight: "65px" }}
-          href="/register"
-        >Register</a>
-        <NewsTicker />
-      </nav>
-
-      <main>
+      <main className="mainPart">
         {rowData.map((article, index) => (
           <article key={index}>
-            <h2>
+            <p className="top">
               Top{" "}
               {article.category.charAt(0).toUpperCase() +
                 article.category.slice(1).toLowerCase()}
-            </h2>
-            <h2>{article.title}</h2>
+            </p>
+            <h2 className="headA">{article.title}</h2>
             <p>{article.content}</p>
             <a href={article.link} target="_blank" rel="noopener noreferrer">
               Read More
