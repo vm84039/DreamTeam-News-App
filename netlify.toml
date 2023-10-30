@@ -1,0 +1,2 @@
+  command = "cd frontend/react-app && docker build -t my-frontend-app:latest ."
+  publish = "react-app/build"
