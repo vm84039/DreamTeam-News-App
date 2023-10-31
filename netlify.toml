@@ -1,4 +1,4 @@
   [build]
   environment = { CI = "false" }
-  command = "cd react-app && docker build -t my-frontend-app:latest ."
+  command = "cd react-app && docker build -t vm84039/newsapp-react:latest ."
   publish = "react-app/build"
