@@ -1,4 +1,5 @@
-  [build]
+[build]
+  image = "netlify/build:xenial"
   environment = { CI = "false" }
   command = "cd react-app && docker build -t vm84039/newsapp-react:latest ."
   publish = "react-app/build"
