@@ -1,5 +1,5 @@
 import "./NavBar.css";
-import React, { useState, useEffect } from "react";
+//import React, { useState, useEffect } from "react";
 import NewsTicker from "./NewsTicker/NewsTicker";
 
 const NavBar = () => {
@@ -7,13 +7,13 @@ const NavBar = () => {
     <div>
       <nav>
         <a href="/">Home</a>
-        <a href="#">World</a>
+        <a href="/">World</a>
         <a href="/technology">Technology</a>
-        <a href="#">Sports</a>
-        <a href="#">Entertainment</a>
+        <a href="/">Sports</a>
+        <a href="/">Entertainment</a>
         <a
           style={{ position: "absolute", right: "0", paddingRight: "10px" }}
-          href="#"
+          href="/"
         >
           Login
         </a>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../Home.css";
 import { getNewsByCategory } from "../../service/NewsApi";
-import NewsTicker from "../NewsTicker/NewsTicker";
+//import NewsTicker from "../NewsTicker/NewsTicker";
 import NavBar from "../NavBar";
 
 const Technology = () => {
@@ -12,7 +12,7 @@ const Technology = () => {
       .then((data) => setRowData(data)) // Reverse the rowData array
       .catch((error) => console.error("Error fetching data:", error));
     console.log(rowData);
-  }, []);
+  }, [rowData]);
 
   return (
     <div className="Home">

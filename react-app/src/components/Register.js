@@ -3,7 +3,7 @@ import './Register.css';
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../lib/errorLib";
 import Form from "react-bootstrap/Form";
-import {postcodeValidator} from "postcode-validator";
+//import {postcodeValidator} from "postcode-validator";
 import { useAppContext } from "../lib/contextLib";
 
 export default function Register() {
@@ -14,8 +14,8 @@ export default function Register() {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [role, setRole] = useState("ROLE_USER");
-    const [enabled, setEnabled] = useState(true);
+    const [role] = useState("ROLE_USER");
+    const [enabled] = useState(true);
     
 
     function validateForm() {
@@ -52,7 +52,7 @@ export default function Register() {
         setIsLoading(true);
     
         try {
-            const res = await userRegister({name, email, username, password, role, enabled});
+            //const res = await userRegister({name, email, username, password, role, enabled});
             userRegistered(true);
         }   catch (e) {
             onError(e);

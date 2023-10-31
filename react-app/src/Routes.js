@@ -5,7 +5,7 @@ import Home from "./components/pages/Home";
 import Login from "./components/Login";
 import NotFound from "./components/NotFound";
 import Register from "./components/Register";
-import AuthenticatedRoute from "./components/AuthenticatedRoute";
+//import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 import RegisterRoute from "./components/RegisterRoute";
 

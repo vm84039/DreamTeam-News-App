@@ -1,18 +1,25 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import { AppContext } from "./lib/contextLib";
 import Routes from "./Routes";
-import { LinkContainer } from "react-router-bootstrap";
+//import { LinkContainer } from "react-router-bootstrap";
 
 function App() {
 
-  const nav = useNavigate();
-  const [isAuthenticating, setIsAuthenticating] = useState(true);
+ // const nav = useNavigate();
+  const [ setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isRegistered, userRegistered] = useState(false);
   const [user, setUser] = useState("");
   const [token, setToken] = useState("");
+
+  const loggedIn = useCallback(async () => {
+    if (!token) {
+      throw new Error("NOT LOGGED IN");
+    }
+    // ... your existing logic ...
+  }, [token, /* other dependencies */]);
 
   const onLoad = useCallback(async () => {
     try {
@@ -32,22 +39,21 @@ function App() {
     onLoad();
   }, [onLoad]);
 
-  async function loggedIn() {
-    if (!token) {
-      throw new Error("NOT LOGGED IN");
-    }
 
-  }
+
+  useEffect(() => {
+    onLoad();
+  }, [onLoad]);
   
 
-  function handleLogout() {
-    userHasAuthenticated(false);
-    userRegistered(false)
-    setToken("");
-    setUser("")
-    nav("/login");
-    //setIsAuthenticating(true);
-  }
+  // function handleLogout() {
+  //   userHasAuthenticated(false);
+  //   userRegistered(false)
+  //   setToken("");
+  //   setUser("")
+  //   nav("/login");
+  //   //setIsAuthenticating(true);
+  // }
 
   sessionStorage.clear();
 
