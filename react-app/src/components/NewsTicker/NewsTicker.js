@@ -12,7 +12,7 @@ const NewsTicker = () => {
       .then((data) => setRowData(data)) // Reverse the rowData array
       .catch((error) => console.error("Error fetching data:", error));
       console.log(rowData);
-  }, []);
+  }, [rowData]);
 
   return (
     <Marquee>
