@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "./lib/contextLib";
@@ -14,11 +14,7 @@ function App() {
   const [user, setUser] = useState("");
   const [token, setToken] = useState("");
 
-  useEffect(() => {
-    onLoad();
-  }, []);
-  
-  async function onLoad() {
+  const onLoad = useCallback(async () => {
     try {
       if (isRegistered) {
         userRegistered(false);
@@ -26,13 +22,15 @@ function App() {
       await loggedIn();
       userHasAuthenticated(true);
     } catch (e) {
-      // if (e !== "No current user") {
-      //   alert(e);
-      // }
+      // Handle any errors here
     }
-  
+
     setIsAuthenticating(false);
-  }
+  }, [isRegistered, loggedIn, userRegistered, userHasAuthenticated, setIsAuthenticating]);
+
+  useEffect(() => {
+    onLoad();
+  }, [onLoad]);
 
   async function loggedIn() {
     if (!token) {
