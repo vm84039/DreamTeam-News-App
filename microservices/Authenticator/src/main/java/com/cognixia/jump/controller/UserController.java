@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.repository.UserRepository;
-import com.cognixia.jump.service.NewsService;
+//import com.cognixia.jump.service.NewsService;
 
 
 @RestController
@@ -28,8 +28,8 @@ public class UserController {
 	@Autowired
 	private UserRepository repo;
 	
-	@Autowired
-	private NewsService newsService;
+	//@Autowired
+	//private NewsService newsService;
 	
 	@GetMapping("/user")
 	public List<User> getAllUsers() {
