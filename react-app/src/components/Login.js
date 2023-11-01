@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import './Login.css';
+import React, { useState } from "react";
+import "./Login.css";
 import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../lib/contextLib";
 import { onError } from "../lib/errorLib";
 import Form from "react-bootstrap/Form";
 
-export default function Login() {
+import NewsTicker from "./NewsTicker/NewsTicker";
 
+export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const { userHasAuthenticated, setToken, setUser } = useAppContext();
   const [username, setUsername] = useState("");
@@ -17,92 +18,104 @@ export default function Login() {
   }
 
   async function userLogin(credentials) {
-    return fetch('http://localhost:8082/authenticate', {
-      method: 'POST',
+    return fetch("http://localhost:8082/authenticate", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(credentials)
+      body: JSON.stringify(credentials),
     })
-     .then(data =>  {
-      if (data.ok) {
-        return data.json();
-      }
-      throw new Error("WRONG USERNAME AND PASSWORD");
-    })
-     .catch((error) => {
-      console.log(error);
-    });
-   }
+      .then((data) => {
+        if (data.ok) {
+          return data.json();
+        }
+        throw new Error("WRONG USERNAME AND PASSWORD");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-   async function getUser(token) {
-    return fetch('http://localhost:8082/api/user/whoami', {
-      method: 'GET',
+  async function getUser(token) {
+    return fetch("http://localhost:8082/api/user/whoami", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token.jwt
-      }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token.jwt,
+      },
     })
-     .then(data =>  {
-      if (data.ok) {
-        return data.json();
-      }
-      throw new Error("WRONG USERNAME AND PASSWORD");
-    })
-     .catch((error) => {
-      console.log(error);
-    });
-   }
+      .then((data) => {
+        if (data.ok) {
+          return data.json();
+        }
+        throw new Error("WRONG USERNAME AND PASSWORD");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-   async function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     setIsLoading(true);
 
     try {
-        const token = await userLogin({username, password});
-        const user = await getUser(token);
-        userHasAuthenticated(true);
-        setToken(token);
-        // console.log(user)
-        setUser(user)
-    }   catch (e) {
-        onError(e);
-        setIsLoading(false);
+      const token = await userLogin({ username, password });
+      const user = await getUser(token);
+      userHasAuthenticated(true);
+      setToken(token);
+      // console.log(user)
+      setUser(user);
+    } catch (e) {
+      onError(e);
+      setIsLoading(false);
     }
   }
-      
 
-   return (
-    <div className="Login">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group size="lg" controlId="username">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            autoFocus
-            type="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <LoaderButton
+  return (
+    <div className="page">
+      <header>
+        <h1 className="title">Dreamtastic News</h1>
+        <h3 className="title">The fever dream you can't wake up from!</h3>
+      </header>
+      <NewsTicker />
+      <div className="Login">
+        <Form onSubmit={handleSubmit} className="form">
+          <Form.Group size="lg" controlId="title" className="title">
+            <h1>Login</h1>
+          </Form.Group>
+          <Form.Group size="lg" controlId="username">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              autoFocus
+              type="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group size="lg" controlId="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+          <LoaderButton
             block="true"
             size="lg"
             type="submit"
             isLoading={isLoading}
             disabled={!validateForm()}
-        >
+          >
             Login
-        </LoaderButton>
-      </Form>
+          </LoaderButton>
+        </Form>
+      </div>
+      <footer>
+        <p>&copy; 2023 News Website</p>
+      </footer>
     </div>
   );
 }

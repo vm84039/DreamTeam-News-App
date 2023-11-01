@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../Home.css";
 import { getNewsforHomePage } from "../../service/NewsApi";
 import NavBar from "../NavBar";
+import NewsTicker from "../NewsTicker/NewsTicker";
 
 const Home = () => {
   const [rowData, setRowData] = useState([]);
@@ -19,6 +20,7 @@ const Home = () => {
         <h3 className="title">The fever dream you can't wake up from!</h3>
       </header>
       <NavBar />
+      <NewsTicker />
 
       <main className="mainPart">
         {rowData.map((article, index) => (

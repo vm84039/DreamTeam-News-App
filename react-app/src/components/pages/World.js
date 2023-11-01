@@ -4,9 +4,9 @@ import { getNewsByCategory } from "../../service/NewsApi";
 import NewsTicker from "../NewsTicker/NewsTicker";
 import NavBar from "../NavBar";
 
-const Technology = () => {
+const World = () => {
   const [rowData, setRowData] = useState([]);
-  const endpoint = "technology";
+  const endpoint = "world";
   useEffect(() => {
     getNewsByCategory(endpoint)
       .then((data) => setRowData(data)) // Reverse the rowData array
@@ -41,4 +41,4 @@ const Technology = () => {
   );
 };
 
-export default Technology;
+export default World;

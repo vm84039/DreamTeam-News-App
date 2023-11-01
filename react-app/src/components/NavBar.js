@@ -1,23 +1,27 @@
 import "./NavBar.css";
 //import React, { useState, useEffect } from "react";
-import NewsTicker from "./NewsTicker/NewsTicker";
 
 const NavBar = () => {
   return (
     <div>
       <nav>
         <a href="/">Home</a>
-        <a href="/">World</a>
+        <a href="/world">World</a>
         <a href="/technology">Technology</a>
-        <a href="/">Sports</a>
-        <a href="/">Entertainment</a>
+        <a href="/politics">Politics</a>
+        <a href="/science">Science</a>
         <a
           style={{ position: "absolute", right: "0", paddingRight: "10px" }}
-          href="/"
+          href="/login"
         >
           Login
         </a>
-        <NewsTicker />
+        <a
+          style={{ position: "absolute", left: "0", paddingLeft: "10px" }}
+          href="/register"
+        >
+          Register
+        </a>
       </nav>
     </div>
   );

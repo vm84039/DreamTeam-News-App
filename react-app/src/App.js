@@ -1,27 +1,23 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import './App.css';
-//import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import { useNavigate } from "react-router-dom";
 import { AppContext } from "./lib/contextLib";
 import Routes from "./Routes";
-//import { LinkContainer } from "react-router-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 function App() {
-
- // const nav = useNavigate();
-  const [ setIsAuthenticating] = useState(true);
+  const nav = useNavigate();
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isRegistered, userRegistered] = useState(false);
   const [user, setUser] = useState("");
   const [token, setToken] = useState("");
 
-  const loggedIn = useCallback(async () => {
-    if (!token) {
-      throw new Error("NOT LOGGED IN");
-    }
-    // ... your existing logic ...
-  }, [token, /* other dependencies */]);
+  useEffect(() => {
+    onLoad();
+  }, []);
 
-  const onLoad = useCallback(async () => {
+  async function onLoad() {
     try {
       if (isRegistered) {
         userRegistered(false);
@@ -29,39 +25,46 @@ function App() {
       await loggedIn();
       userHasAuthenticated(true);
     } catch (e) {
-      // Handle any errors here
+      // if (e !== "No current user") {
+      //   alert(e);
+      // }
     }
 
     setIsAuthenticating(false);
-  }, [isRegistered, loggedIn, userRegistered, userHasAuthenticated, setIsAuthenticating]);
+  }
 
-  useEffect(() => {
-    onLoad();
-  }, [onLoad]);
+  async function loggedIn() {
+    if (!token) {
+      throw new Error("NOT LOGGED IN");
+    }
+  }
 
-
-
-  useEffect(() => {
-    onLoad();
-  }, [onLoad]);
-  
-
-  // function handleLogout() {
-  //   userHasAuthenticated(false);
-  //   userRegistered(false)
-  //   setToken("");
-  //   setUser("")
-  //   nav("/login");
-  //   //setIsAuthenticating(true);
-  // }
+  function handleLogout() {
+    userHasAuthenticated(false);
+    userRegistered(false);
+    setToken("");
+    setUser("");
+    nav("/login");
+    //setIsAuthenticating(true);
+  }
 
   sessionStorage.clear();
 
   return (
     <div className="App">
-
       <>
-        <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, token, setToken, isRegistered, userRegistered, user, setUser }}>
+        <AppContext.Provider
+          value={{
+            isAuthenticated,
+            userHasAuthenticated,
+            token,
+            setToken,
+            isRegistered,
+            userRegistered,
+            user,
+            setUser,
+          }}
+        >
           <Routes />
         </AppContext.Provider>
       </>

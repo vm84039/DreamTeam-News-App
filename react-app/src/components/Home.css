@@ -3,10 +3,12 @@
     src: url(Tinos-Regular.ttf);
 }
 
+
 @font-face {
     font-family: headerFont;
     src: url(MCKLB___.ttf);
 }
+
 
 .mainPart {
     font-family: mainFont;
@@ -26,7 +28,7 @@
 
 .Home header, footer {
     font-family: headerFont;
-    background-color: #B6FFFA;
+    background-color: #295363;
     color: #fff;
     text-align: center;
     padding: 10px 0;
@@ -38,16 +40,17 @@ h1 {
 }
 
 h3 {
-    color:#071952
+    color:#a2b5f3
 }
 .Home header a {
     color: #fff;
     text-align: right;
     padding: 10px 0;
     text-decoration: none;
+    cursor: url(../iconmonstr-newspaper-4-32.png);
 }
 .Home nav {
-    background-color: #98E4FF;
+    background-color: #3d6d80;
     padding: 10px 0;
     text-align: center;
 }
@@ -55,6 +58,7 @@ h3 {
     color: #fff;
     margin: 0 10px;
     text-decoration: none;
+    cursor: url(../iconmonstr-newspaper-4-32.png);
 }
 .Home main {
     padding: 20px;
@@ -78,4 +82,8 @@ h3 {
 .category
 {
     text-transform: capitalize;
+}
+
+body {
+    cursor: url(../customcurs.png), auto;
 }
