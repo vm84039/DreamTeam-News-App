@@ -24,8 +24,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "ngrok": "ngrok http 3000 --log=stdout | grep -oP 'https://[a-zA-Z0-9]*.ngrok.io'",
-    "postbuild": "npm run ngrok"
   },
   "eslintConfig": {
     "extends": [
