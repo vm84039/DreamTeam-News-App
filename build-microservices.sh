@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Install Maven
-apt-get update && sudo apt-get install -y maven
-
-echo "Building Spring Boot .jar files..."
-sleep 3
-
 echo "Building Spring Boot .jar files..."
 sleep 3
 
@@ -17,22 +11,22 @@ cd ./microservices/$AUTHDIR
 
 echo "Building Authenticator..."
 echo "---------------------"
-echo "command: mvn clean install -DskipTests"
-mvn clean install -DskipTests
+echo "command: ./gradlew build"
+./gradlew build
 sleep 3
 
 cd ../$SCHEDULERDIR
 echo "Building scheduler..."
 echo "---------------------"
-echo "command: mvn clean install -DskipTests"
-mvn clean install -DskipTests
+echo "command: ./gradlew build"
+./gradlew build
 sleep 3
 
 cd ../$SPRINGAPIDIR
 echo "Building spring-api..."
 echo "---------------------"
-echo "command: mvn clean install -DskipTests"
-mvn clean install -DskipTests
+echo "command: ./gradlew build"
+./gradlew build
 sleep 3
 
 echo "Microservices built successfully!"
