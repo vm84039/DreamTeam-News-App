@@ -1,32 +1,35 @@
-# Stage 1: Build React app
-FROM node:14 AS react-build
-WORKDIR /app/react-app
-COPY react-app/ ./
+# Use an official Node image as a parent image for React app
+FROM node:16.15.1 AS react-builder
+
+WORKDIR /usr/src/react-app
+COPY react-app/package*.json ./
 RUN npm install
+COPY react-app .
 RUN npm run build
 
-# Stage 2: Build Spring Boot microservices
-FROM maven:3.8.3-openjdk-17 AS spring-build
-WORKDIR /app/microservices
-COPY microservices/Authenticator /app/microservices/Authenticator
-COPY microservices/scheduler /app/microservices/scheduler
-COPY microservices/spring-api /app/microservices/spring-api
-WORKDIR /app/microservices/Authenticator
-RUN mvn clean install -DskipTests
-WORKDIR /app/microservices/scheduler
-RUN mvn clean install -DskipTests
-WORKDIR /app/microservices/spring-api
-RUN mvn clean install -DskipTests
+# Use an official OpenJDK runtime as a parent image for microservices
+FROM openjdk:17
 
-# Stage 3: Final image with built artifacts
-FROM adoptopenjdk/openjdk17 AS final
-WORKDIR /app
-COPY --from=react-build /app/react-app/build /app/react-app/build
-COPY --from=spring-build /app/microservices/Authenticator/target/*.jar /app/microservices/Authenticator/
-COPY --from=spring-build /app/microservices/scheduler/target/*.jar /app/microservices/scheduler/
-COPY --from=spring-build /app/microservices/spring-api/target/*.jar /app/microservices/spring-api/
+# Set the working directory inside the container
+WORKDIR /usr/src/app
 
-# Your additional setup and configurations can be added here
+# Copy the built React app from the previous stage
+COPY --from=react-builder /usr/src/react-app/build /usr/src/app/react-app/build
 
-# Start your microservices using a start command
-CMD ["java", "-jar", "/app/microservices/Authenticator/authenticator-service.jar"]
+# Copy Authenticator JAR file
+COPY microservices/Authenticator/target/authenticator.jar ./authenticator.jar
+
+# Copy Scheduler JAR file
+COPY microservices/scheduler/target/scheduler.jar ./scheduler.jar
+
+# Copy Spring API JAR file
+COPY microservices/spring-api/target/spring-api.jar ./spring-api.jar
+
+# Expose ports for the applications
+EXPOSE 3000  # React app
+EXPOSE 8082  # Authenticator
+EXPOSE 8081  # Scheduler
+EXPOSE 8080  # Spring API
+
+# Define the command to start the applications
+CMD ["java", "-jar", "authenticator.jar"]
