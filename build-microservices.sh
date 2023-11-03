@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Install Maven
+sudo apt-get update && sudo apt-get install -y maven
+
+echo "Building Spring Boot .jar files..."
+sleep 3
+
 echo "Building Spring Boot .jar files..."
 sleep 3
 
