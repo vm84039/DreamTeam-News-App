@@ -1,21 +1,20 @@
 #!/bin/bash
 
-# Build microservices
-echo "Building microservices..."
-./build-microservices.sh
+echo "Building Spring Boot .jar files..."
+sleep 3
 
-# Build and deploy front-end
-echo "Building and deploying front-end..."
-cd react-app
-npm install
-npm run build
+AUTHDIR="Authenticator"
+SCHEDULERDIR="scheduler"
+SPRINGAPIDIR="spring-api"
+REACTAPPDIR="react-app"
 
-# Start microservices
-echo "Starting microservices..."
-java -jar ../microservices/Authenticator/target/Authenticator.jar &
-java -jar ../microservices/scheduler/target/scheduler.jar &
-java -jar ../microservices/spring-api/target/spring-api.jar &
+# Build Spring Boot microservices using Docker
+docker run --rm -v $(pwd)/microservices/$AUTHDIR:/app -w /app maven:3.8.3-openjdk-17 mvn clean install -DskipTests
+docker run --rm -v $(pwd)/microservices/$SCHEDULERDIR:/app -w /app maven:3.8.3-openjdk-17 mvn clean install -DskipTests
+docker run --rm -v $(pwd)/microservices/$SPRINGAPIDIR:/app -w /app maven:3.8.3-openjdk-17 mvn clean install -DskipTests
 
-# Start Node.js server
-echo "Starting Node.js server..."
-node index.js &
+# Build React app using Docker
+docker run --rm -v $(pwd)/$REACTAPPDIR:/app -w /app node:14 npm install
+docker run --rm -v $(pwd)/$REACTAPPDIR:/app -w /app node:14 npm run build
+
+echo "Microservices and React app built successfully!"
