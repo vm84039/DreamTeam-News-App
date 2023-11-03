@@ -1,20 +1,27 @@
 #!/bin/bash
 
-echo "Building Spring Boot .jar files..."
+echo "Building Spring Boot and React app..."
 sleep 3
 
-AUTHDIR="Authenticator"
-SCHEDULERDIR="scheduler"
-SPRINGAPIDIR="spring-api"
-REACTAPPDIR="react-app"
+# Build React app
+echo "Building React app..."
+cd react-app
+npm install
+npm run build
+cd ..
 
-# Build Spring Boot microservices using Docker
-docker run --rm -v $(pwd)/microservices/$AUTHDIR:/app -w /app maven:3.8.3-openjdk-17 mvn clean install -DskipTests
-docker run --rm -v $(pwd)/microservices/$SCHEDULERDIR:/app -w /app maven:3.8.3-openjdk-17 mvn clean install -DskipTests
-docker run --rm -v $(pwd)/microservices/$SPRINGAPIDIR:/app -w /app maven:3.8.3-openjdk-17 mvn clean install -DskipTests
+# Build Spring Boot microservices with Gradle
+echo "Building Spring Boot microservices..."
+cd microservices/Authenticator
+./gradlew build
+cd ../..
 
-# Build React app using Docker
-docker run --rm -v $(pwd)/$REACTAPPDIR:/app -w /app node:14 npm install
-docker run --rm -v $(pwd)/$REACTAPPDIR:/app -w /app node:14 npm run build
+cd microservices/scheduler
+./gradlew build
+cd ../..
+
+cd microservices/spring-api
+./gradlew build
+cd ../..
 
 echo "Microservices and React app built successfully!"
