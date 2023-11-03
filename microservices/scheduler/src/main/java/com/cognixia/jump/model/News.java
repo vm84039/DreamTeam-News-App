@@ -30,9 +30,15 @@ public class News {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@Column(length = 500)
 	private String articleId;
+
+	@Column(length = 500)
 	private String title;
+
+	@Column(length = 500)
 	private String link;
+
 	@Column(length = 500)
 	private String keyword = "";
 
@@ -73,13 +79,16 @@ public class News {
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
-	}
+        // Truncate the description to 500 characters if it exceeds the limit
+        this.title = title.length() > 500 ? title.substring(0, 500) : title;
+    }
+
 
 	public String getLink() {
 		return link;
 	}
 
+	@Column(length = 1000)
 	public void setLink(String link) {
 		this.link = link;
 	}
@@ -88,25 +97,28 @@ public class News {
 		return keyword;
 	}
 
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
+    public void setKeyword(String keyword) {
+        // Truncate the keyword to 500 characters if it exceeds the limit
+        this.keyword = keyword.length() > 500 ? keyword.substring(0, 500) : keyword;
+    }
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        // Truncate the description to 500 characters if it exceeds the limit
+        this.description = description.length() > 500 ? description.substring(0, 500) : description;
+    }
 
 	public String getContent() {
 		return content;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setContent(String content) {
+        // Truncate the content to 500 characters if it exceeds the limit
+        this.content = content.length() > 500 ? content.substring(0, 500) : content;
+    }
 
 	public String getPubDate() {
 		return pubDate;

@@ -16,7 +16,7 @@ public class Scheduler {
 	@Autowired
 	NewsApiService newsService;
 	
-	@Scheduled(initialDelay = 1000000, fixedRate = 5400000) // 1 hour in milliseconds
+	@Scheduled( fixedRate = 5400000) // 1 hour in milliseconds
     public void runScheduledTask() {
         // Code to be executed periodically
         Category[] categories = Category.values();
@@ -26,8 +26,8 @@ public class Scheduler {
         long totalEntries = newsService.getTotalEntries();
 
         // If the number of entries is greater than 500, reduce it to 500 by deleting oldest entries
-        if (totalEntries > 500) {
-            int entriesToDelete = (int) (totalEntries - 500);
+        if (totalEntries > 5000) {
+            int entriesToDelete = (int) (totalEntries - 5000);
             newsService.deleteOldestEntries(entriesToDelete);
         }
     }
