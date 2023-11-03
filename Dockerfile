@@ -1,31 +1,32 @@
-# Use a Node.js base image for the React app
-FROM node:14 AS react-builder
+# Stage 1: Build React app
+FROM node:14 AS react-build
 WORKDIR /app/react-app
-COPY react-app/package*.json ./
-RUN npm install
 COPY react-app/ ./
+RUN npm install
 RUN npm run build
 
-# Use a Maven base image for building Spring Boot microservices
-FROM maven:3.8.3-openjdk-17 AS maven-builder
+# Stage 2: Build Spring Boot microservices
+FROM maven:3.8.3-openjdk-17 AS spring-build
 WORKDIR /app/microservices
-COPY microservices/ /app/microservices
+COPY microservices/Authenticator /app/microservices/Authenticator
+COPY microservices/scheduler /app/microservices/scheduler
+COPY microservices/spring-api /app/microservices/spring-api
+WORKDIR /app/microservices/Authenticator
+RUN mvn clean install -DskipTests
+WORKDIR /app/microservices/scheduler
+RUN mvn clean install -DskipTests
+WORKDIR /app/microservices/spring-api
 RUN mvn clean install -DskipTests
 
-# Use a Node.js base image for the final runtime environment
-FROM node:14
+# Stage 3: Final image with built artifacts
+FROM adoptopenjdk/openjdk17 AS final
 WORKDIR /app
-COPY --from=react-builder /app/react-app/build/ ./react-app/build/
-COPY --from=maven-builder /app/microservices/Authenticator/target/*.jar ./microservices/Authenticator/
-COPY --from=maven-builder /app/microservices/scheduler/target/*.jar ./microservices/scheduler/
-COPY --from=maven-builder /app/microservices/spring-api/target/*.jar ./microservices/spring-api/
-COPY deploy.sh ./
+COPY --from=react-build /app/react-app/build /app/react-app/build
+COPY --from=spring-build /app/microservices/Authenticator/target/*.jar /app/microservices/Authenticator/
+COPY --from=spring-build /app/microservices/scheduler/target/*.jar /app/microservices/scheduler/
+COPY --from=spring-build /app/microservices/spring-api/target/*.jar /app/microservices/spring-api/
 
-# Install Docker inside the container
-RUN apt-get update && apt-get install -y docker.io
+# Your additional setup and configurations can be added here
 
-# Grant execute permissions to the deploy script
-RUN chmod +x deploy.sh
-
-# Start your application using the deploy script
-CMD ["./deploy.sh"]
+# Start your microservices using a start command
+CMD ["java", "-jar", "/app/microservices/Authenticator/authenticator-service.jar"]
