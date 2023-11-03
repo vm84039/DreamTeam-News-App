@@ -1,27 +1,21 @@
 #!/bin/bash
 
-echo "Building Spring Boot and React app..."
-sleep 3
+# Build microservices
+echo "Building microservices..."
+./build-microservices.sh
 
-# Build React app
-echo "Building React app..."
+# Build and deploy front-end
+echo "Building and deploying front-end..."
 cd react-app
 npm install
 npm run build
-cd ..
 
-# Build Spring Boot microservices with Gradle
-echo "Building Spring Boot microservices..."
-cd microservices/Authenticator
-./gradlew build
-cd ../..
+# Start microservices
+echo "Starting microservices..."
+java -jar ../microservices/Authenticator/target/Authenticator.jar &
+java -jar ../microservices/scheduler/target/scheduler.jar &
+java -jar ../microservices/spring-api/target/spring-api.jar &
 
-cd microservices/scheduler
-./gradlew build
-cd ../..
-
-cd microservices/spring-api
-./gradlew build
-cd ../..
-
-echo "Microservices and React app built successfully!"
+# Start Node.js server
+echo "Starting Node.js server..."
+node index.js &
