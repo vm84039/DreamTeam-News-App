@@ -10,43 +10,41 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
-	
+
 	public static enum Role {
-		ROLE_USER, ROLE_HEAD, ROLE_ADMIN   // roles should start with capital ROLE_ and be completely capital letters
+		ROLE_USER, ROLE_HEAD, ROLE_ADMIN // roles should start with capital ROLE_ and be completely capital letters
 	}
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@NotBlank
 	@Column(unique = true, nullable = false)
 	private String username;
-	
+
 	@NotBlank
 	@Column(nullable = false)
 	private String password;
-	
+
 	@NotBlank
 	private String name;
-	
+
 	@NotBlank
 	private String email;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Role role;
-	
-	@Column(columnDefinition = "bit default 1")
+
+	@Column(columnDefinition = "BOOLEAN DEFAULT true")
 	private boolean enabled;
-	
-	
+
 	public User(Integer id, @NotBlank String username, @NotBlank String password, @NotBlank String name,
-			 @NotBlank String email, Role role, boolean enabled) {
+			@NotBlank String email, Role role, boolean enabled) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -58,7 +56,7 @@ public class User {
 	}
 
 	public User() {
-		
+
 	}
 
 	public Integer getId() {
@@ -123,5 +121,4 @@ public class User {
 				+ email + ", role=" + role + ", enabled=" + enabled + "]";
 	}
 
-	
 }

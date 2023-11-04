@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.repository.UserRepository;
-//import com.cognixia.jump.service.NewsService;
 
 
 @RestController
@@ -27,9 +26,6 @@ public class UserController {
 	
 	@Autowired
 	private UserRepository repo;
-	
-	//@Autowired
-	//private NewsService newsService;
 	
 	@GetMapping("/user")
 	public List<User> getAllUsers() {
@@ -49,20 +45,20 @@ public class UserController {
 		return ResponseEntity.status(200).body(found);
 	}
 	
-	@GetMapping("/user/whoami")
-	public ResponseEntity<?> getCurrentUser() {
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username = userDetails.getUsername();
-		Optional<User> found = repo.findByUsername(username);
-		if (!found.isEmpty()) {
-			// FIND ALL OTHER USER RELATED INFO FROM OTHER REPOS/ENDPOINTS
-			// newsService.getUserStuff
-			found.get().setPassword("hidden");
-			return ResponseEntity.status(200).body(found.get());
-		}
-		
-		return ResponseEntity.status(200).body("user not found");
-	}
+//	@GetMapping("/user/whoami")
+//	public ResponseEntity<?> getCurrentUser() {
+//		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		String username = userDetails.getUsername();
+//		Optional<User> found = repo.findByUsername(username);
+//		if (!found.isEmpty()) {
+//			// FIND ALL OTHER USER RELATED INFO FROM OTHER REPOS/ENDPOINTS
+//			// newsService.getUserStuff
+//			found.get().setPassword("hidden");
+//			return ResponseEntity.status(200).body(found.get());
+//		}
+//		
+//		return ResponseEntity.status(200).body("user not found");
+//	}
 	
 	@PostMapping("/user")
 	public ResponseEntity<User> createUser(@RequestBody User user) {
