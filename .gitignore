@@ -64,3 +64,5 @@ yarn-debug.log*
 yarn-error.log*
 
 microservices/scheduler/src/main/resources/application.properties
+microservices/spring-api/src/main/resources/application.properties
+microservices/Authenticator/src/main/resources/application.properties

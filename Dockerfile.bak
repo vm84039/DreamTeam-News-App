@@ -1,0 +1,57 @@
+# Stage 1: Build the React app
+FROM node:14 AS react-builder
+WORKDIR /usr/src/app/react-app
+COPY react-app/package*.json ./
+RUN npm install
+COPY react-app/ ./
+RUN npm run build
+
+# Stage 2: Build the Spring Boot applications and set up Java environment
+FROM maven:3.8.3-openjdk-17 AS maven-builder
+WORKDIR /usr/src/app/microservices
+
+# Copy the build script into the container
+COPY microservices/build-spring.sh ./
+
+# Make the build script executable
+RUN chmod +x build-spring.sh
+
+# Run the build script to build the Spring Boot applications
+RUN ./build-spring.sh
+
+# Stage 3: Create the final image
+FROM openjdk:17-jdk-slim
+WORKDIR /usr/src/app
+
+# Copy artifacts from the builder stage
+COPY --from=maven-builder /usr/src/app/microservices/Authenticator/target/authenticator.jar ./Authenticator/target/authenticator.jar
+COPY --from=maven-builder /usr/src/app/microservices/scheduler/target/scheduler.jar ./scheduler/target/scheduler.jar
+COPY --from=maven-builder /usr/src/app/microservices/spring-api/target/spring-api.jar ./spring-api/target/spring-api.jar
+COPY start-services.sh .
+
+# Set execute permissions for the custom script
+RUN chmod +x start-services.sh
+
+# Expose ports for the applications
+EXPOSE 3000
+EXPOSE 8081
+EXPOSE 8082
+EXPOSE 8083
+
+# Define the default command to start services using the custom script
+CMD ["./start-services.sh"]
+
+# Install npm in the final image
+RUN apt-get update && apt-get install -y npm
+
+# Set execute permissions for the custom script
+RUN chmod +x start-services.sh
+
+# Expose ports for the applications
+EXPOSE 3000
+EXPOSE 8081
+EXPOSE 8082
+EXPOSE 8083
+
+# Define the default command to start services using the custom script
+CMD ["./start-services.sh"]
