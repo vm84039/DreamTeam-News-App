@@ -8,9 +8,9 @@
   "scripts": {
     "start": "concurrently \"npm --prefix client start\" \"npm --prefix server start\"",
     "install-all": "node install-all.js"
-
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3"
   }
 }
