@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "http://localhost:8080/api/page/";
+const API_URL = "http://localhost:8080/api/news/";
 
 export const getNewsforHomePage = async () => {
     try {
@@ -26,7 +26,7 @@ export const getNewsforTicker = async () => {
 
 export const getNewsByCategory = async (category) => {
     try {
-        const response = await axios.get(API_URL + category);
+        const response = await axios.get(API_URL + "page/"+category);
         return response.data; // Return response data
     } catch (error) {
         console.error('Error fetching data:', error);

@@ -15,7 +15,7 @@ router.get('/page/:category', async (req, res) => {
 });
 
 // Endpoint to get news for homepage
-router.get('/home', async (req, res) => {
+router.get('/homepage', async (req, res) => {
   try {
     const news = await newsService.getNewsforHomePage();
     if (news.length === 0) {

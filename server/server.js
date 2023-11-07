@@ -10,12 +10,12 @@ process.env.SECRET_KEY = process.env.SECRET_KEY || generatedSecretKey;
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-
+app.use(cors());
 
 app.use('/api/users/', userController); 
 app.use('/api/news/', newsController);
 
-app.use(cors());
+
 
 
   
