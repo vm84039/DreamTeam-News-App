@@ -16,11 +16,45 @@ const Home = () => {
   return (
     <div className="Home">
       <header>
+        <div className="RightS">
+          <a
+            className="Logins"
+            style={{ position: "absolute", right: "0", paddingRight: "10px" }}
+            href="/login"
+          >
+            Login
+          </a>
+        </div>
+        <div className="LeftS">
+          <a
+            className="Regs"
+            style={{ position: "absolute", left: "0", paddingLeft: "10px" }}
+            href="/register"
+          >
+            Register
+          </a>
+        </div>
+        <img src="./crest.png" alt="crest" />
         <h1 className="title">Dreamtastic News</h1>
         <h3 className="title">The fever dream you can't wake up from!</h3>
       </header>
       <NavBar />
-      <NewsTicker />
+
+      <main className="bigStory">
+        <div className="top">
+          <h2>Top News Story</h2>
+        </div>
+        <div className="picture">
+          <img src="./crest.png" alt="picture" />
+        </div>
+        <div className="content">
+          <h2 className="headA"> Article Title</h2>
+          <p className="story"> content blah blah</p>
+          <a className="storyLink" href="#">
+            Read all about it
+          </a>
+        </div>
+      </main>
 
       <main className="mainPart">
         {rowData.map((article, index) => (
@@ -38,6 +72,7 @@ const Home = () => {
           </article>
         ))}
       </main>
+      <NewsTicker />
 
       <footer>
         <p>&copy; 2023 News Website</p>

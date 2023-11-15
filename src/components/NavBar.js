@@ -10,18 +10,6 @@ const NavBar = () => {
         <a href="/technology">Technology</a>
         <a href="/politics">Politics</a>
         <a href="/science">Science</a>
-        <a
-          style={{ position: "absolute", right: "0", paddingRight: "10px" }}
-          href="/login"
-        >
-          Login
-        </a>
-        <a
-          style={{ position: "absolute", left: "0", paddingLeft: "10px" }}
-          href="/register"
-        >
-          Register
-        </a>
       </nav>
     </div>
   );
