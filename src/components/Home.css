@@ -17,6 +17,26 @@ body {
 
 }
 
+.mainStory_content {
+    display: flex;
+}
+
+.picture {
+    flex: 1;
+    height: auto;
+    width:400px;
+    padding: 20px;
+}
+
+.content {
+    border-left: 2px solid black;
+    padding: 20px;
+    width: 500px
+}
+
+.bigStory {
+    border-bottom: 3px solid black;
+}
 
 .Home body {
     font-family: mainFont;
@@ -24,8 +44,15 @@ body {
     padding: 0;
 }
 
+.image{
+    position: relative;
+   
+}
+
 .title {
     font-family: headerFont;
+
+
 }
 
 .Home header, footer {
@@ -67,14 +94,12 @@ h3 {
 }
 
 .Logins {
-    border-style: double;
     margin-top: 60px;
     margin-right: 60px;
     font-size: 25px;
 }
 
 .Regs {
-    border-style: double;
     margin-top: 60px;
     margin-left: 50px;
     font-size: 25px;
