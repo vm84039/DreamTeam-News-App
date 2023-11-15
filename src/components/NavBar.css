@@ -1,15 +1,15 @@
 @font-face {
     font-family: mainFont;
-    src: url(Tinos-Regular.ttf);
+    src: url(TYPE.ttf);
 }
 
 nav {
+
     font-family: mainFont;
     font-size: 25px;
     color: #fff;
     margin: 0 10px;
     padding: 10px 0;
-    background-color: #3d6d80;
     align-items: center;
     justify-content: space-around;
     padding: 10px 0;

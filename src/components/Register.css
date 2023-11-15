@@ -1,12 +1,12 @@
 @font-face {
   font-family: mainFont;
-  src: url(Tinos-Regular.ttf);
+  src: url(TYPE.ttf);
 }
 
 
 @font-face {
   font-family: headerFont;
-  src: url(MCKLB___.ttf);
+  src: url(TYPE.ttf);
 }
 
 @media all and (min-width: 480px) {
