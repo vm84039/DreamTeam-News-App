@@ -124,7 +124,7 @@ h3 {
 }
 
 body {
-  cursor: url(../customcurs.png), auto;
+  cursor: url(../coffee2.png), auto;
 }
 .crest {
   width: 100px;
@@ -144,7 +144,7 @@ body {
   .img-fluid {
     margin-left: 5%;
     width: 80%;
-    height: 80%;+
+    height: 80%;
     object-fit: cover;
   }
   
