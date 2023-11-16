@@ -7,7 +7,7 @@ import { Container, Row, Col } from "react-bootstrap";
 
 
 const Home = () => {
-  const [rowData, setRowData] = useState([]);
+  const [rowData, setRowData] = useState([]); 
   const [sportsStory, setSportsStory] = useState([]);
   const [worldStory, setWorldStory] = useState([]);
   const [entertainmentStory, setEntertainmentStory] = useState([]);
