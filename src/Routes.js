@@ -1,8 +1,8 @@
 import React from "react";
 import Technology from "./components/pages/Technology";
 import World from "./components/pages/World";
-import Politics from "./components/pages/Politics";
-import Science from "./components/pages/Science";
+import Entertainment from "./components/pages/Entertainment";
+import Sports from "./components/pages/Sports";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Login from "./components/Login";
@@ -18,8 +18,8 @@ export default function Links() {
       <Route path="/" element={<Home />} />
       <Route path="/technology" element={<Technology />} />
       <Route path="/world" element={<World />} />
-      <Route path="/politics" element={<Politics />} />
-      <Route path="/science" element={<Science />} />
+      <Route path="/entertainment" element={<Entertainment />} />
+      <Route path="/sports" element={<Sports />} />
       <Route
         path="/login"
         element={

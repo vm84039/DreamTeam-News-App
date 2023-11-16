@@ -5,14 +5,14 @@ import NewsTicker from "../NewsTicker/NewsTicker";
 import NavBar from "../NavBar";
 import { Container, Row, Col } from "react-bootstrap";
 
-const World = () => {
+const Sports = () => {
   const [rowData, setRowData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [topStory, setTopStory] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const options = { month: "long", day: "numeric", year: "numeric" };
   const todayDate = new Date().toLocaleDateString(undefined, options);
-  const category = "World";
+  const category = "Sports";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -89,7 +89,7 @@ const World = () => {
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Search stories..."
+          placeholder="Search content..."
           value={searchQuery}
           onChange={handleSearch}
         />
@@ -115,4 +115,4 @@ const World = () => {
   );
 };
 
-export default World;
+export default Sports;

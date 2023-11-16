@@ -131,31 +131,38 @@ body {
   height: 120px;
 }
 .custom-container {
-    height: 400px;
-    margin-bottom: 50px;
-    margin-top: 30px;
+  height: 400px;
+  margin-bottom: 50px;
+  margin-top: 30px;
+}
 
-  }
-  
-  .image-col {
-    padding: 0;
-  }
-  
-  .img-fluid {
-    margin-left: 5%;
-    width: 80%;
-    height: 80%;
-    object-fit: cover;
-  }
-  
-  .text-col {
-    padding: 20px;
-  }
-  .story{
-    font-family: headerFont;
-    text-align: justify;
-    font-size: large;
-  }
-  .foot{
-    background: #373636; 
-  }
+.image-col {
+  padding: 0;
+}
+
+.img-fluid {
+  margin-left: 5%;
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+}
+
+.text-col {
+  padding: 20px;
+}
+.story {
+  font-family: headerFont;
+  text-align: justify;
+  font-size: x-large;
+  line-height: 2;
+}
+.foot {
+  background: #373636;
+}
+.capitalize {
+  text-transform: "capitalize";
+}
+.otherStories {
+  height: 750px;
+  overflow-y: auto; /* Add a vertical scrollbar if content overflows */
+}
