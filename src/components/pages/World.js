@@ -7,12 +7,22 @@ import NavBar from "../NavBar";
 const World = () => {
   const [rowData, setRowData] = useState([]);
   const endpoint = "world";
+  const [searchQuery, setSearchQuery] = useState("");
+
+
   useEffect(() => {
     getNewsByCategory(endpoint)
       .then((data) => setRowData(data)) // Reverse the rowData array
       .catch((error) => console.error("Error fetching data:", error));
     console.log(rowData);
   }, [rowData]);
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredData = rowData.filter((article) =>
+    article.content.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="Home">
@@ -22,8 +32,17 @@ const World = () => {
       </header>
       <NavBar />
       <NewsTicker />
+
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search content..."
+          value={searchQuery}
+          onChange={handleSearch}
+        />
+      </div>
       <main>
-        {rowData.map((article, index) => (
+      {filteredData.map((article, index) => (
           <article key={index}>
             <h2>{article.title}</h2>
             <p>{article.content}</p>

@@ -44,4 +44,20 @@ router.get('/ticker', async (req, res) => {
   }
 });
 
+// Endpoint to get news for top story
+router.get('/topstory', async (req, res) => {
+  try {
+    const tickerNews = await newsService.getTopStory();
+    if (tickerNews.length === 0) {
+      res.status(404).send('Server error');
+    } else {
+      res.status(200).json(tickerNews);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
 module.exports = router;

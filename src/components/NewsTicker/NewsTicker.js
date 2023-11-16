@@ -20,7 +20,7 @@ const NewsTicker = () => {
         <NewsTickerTitleComponent key={1} title={rowData[1]} />
         <NewsTickerTitleComponent key={2} title={rowData[2]} />
         <NewsTickerTitleComponent key={3} title={rowData[3]} />
-        <NewsTickerTitleComponent key={2} title={rowData[4]} />
+        <NewsTickerTitleComponent key={4} title={rowData[4]} />
     </Marquee>
   );
 };
