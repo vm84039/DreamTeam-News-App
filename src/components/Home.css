@@ -15,8 +15,6 @@ body {
   font-family: mainFont;
 }
 
-<<<<<<< Updated upstream
-=======
 .mainStory_content {
   display: flex;
 }
@@ -37,7 +35,6 @@ body {
 .bigStory {
   border-bottom: 3px solid black;
 }
->>>>>>> Stashed changes
 
 .Home body {
   font-family: mainFont;
@@ -45,17 +42,12 @@ body {
   padding: 0;
 }
 
-<<<<<<< Updated upstream
-.title {
-    font-family: headerFont;
-=======
 .image {
   position: relative;
 }
 
 .title {
   font-family: headerFont;
->>>>>>> Stashed changes
 }
 
 .Home header,
@@ -98,19 +90,6 @@ h3 {
 }
 
 .Logins {
-<<<<<<< Updated upstream
-    border-style: double;
-    margin-top: 60px;
-    margin-right: 60px;
-    font-size: 25px;
-}
-
-.Regs {
-    border-style: double;
-    margin-top: 60px;
-    margin-left: 50px;
-    font-size: 25px;
-=======
   margin-top: 60px;
   margin-right: 60px;
   font-size: 25px;
@@ -120,7 +99,6 @@ h3 {
   margin-top: 60px;
   margin-left: 50px;
   font-size: 25px;
->>>>>>> Stashed changes
 }
 .Home main {
   padding: 20px;

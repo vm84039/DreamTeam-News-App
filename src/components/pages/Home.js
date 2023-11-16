@@ -58,36 +58,17 @@ const Home = () => {
             Register
           </a>
         </div>
-<<<<<<< Updated upstream
-        <img src="./crest.png" alt="crest" />
-        <h1 className="title">Dreamtastic News</h1>
-        <h3 className="title">The fever dream you can't wake up from!</h3>
-=======
         <div className="headers">
           <h1 className="title">Dreamtastic News</h1>
           <h3 className="title">The fever dream you can't wake up from!</h3>
           <img className="crest" align="middle" src="crest.png" alt="crest" />
         </div>
->>>>>>> Stashed changes
       </header>
       <NavBar />
       <NewsTicker />
 
       <main className="bigStory">
         <div className="top">
-<<<<<<< Updated upstream
-          <h2>Top News Story</h2>
-        </div>
-        <div className="picture">
-          <img src="./crest.png" alt="picture" />
-        </div>
-        <div className="content">
-          <h2 className="headA"> Article Title</h2>
-          <p className="story"> content blah blah</p>
-          <a className="storyLink" href="#">
-            Read all about it
-          </a>
-=======
           <h2 style={{ position: "absolute", left: "0", paddingRight: "10px" }}>
             Top News Story
           </h2>
@@ -97,7 +78,6 @@ const Home = () => {
           <br />
 
           <h1 className="headA">{rowData.title}</h1>
->>>>>>> Stashed changes
         </div>
         {/* Container for Image and Text */}
         <Container fluid className="custom-container">
