@@ -1,6 +1,0 @@
-1. Run the builder.bat file
-2. Make sure Docker is running
-3. Make sure you are in the parent directory for the project
-4. Run the command:
-	docker-compose up -d
-5. Check docker desktop containers to ensure they are running.

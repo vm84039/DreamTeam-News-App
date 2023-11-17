@@ -1,0 +1,26 @@
+/* NewsTicker.css */
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
+.news-ticker {
+    overflow: hidden;
+    padding: 10px;
+    width: 100%;
+    height: 60px; /* Set the fixed height of the ticker */
+    border-top: 3px solid #444;
+    border-bottom: 3px solid #444;
+    padding-right: 10px; 
+    background: #373636;
+
+  }
+  
+
+  
+  .ticker-item {
+    padding: 0;
+    margin-right: 20px;
+    color:#fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight:bolder;
+  }
+  
+ 
