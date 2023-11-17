@@ -1,8 +1,8 @@
 import axios from 'axios';
 //dev
-const API_URL = "http://localhost:3000/api/news/";
+//const API_URL = "http://localhost:3000/api/news/";
 //production
-//const API_URL = "https://dreamtasticnews.onrender.com/api/news/";
+const API_URL = "https://dreamtasticnews.onrender.com/api/news/";
 
 export const getNewsforHomePage = async () => {
     try {
